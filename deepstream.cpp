@@ -251,8 +251,8 @@ tiler_src_pad_buffer_probe (GstPad * pad, GstPadProbeInfo * info,
             NvOSD_TextParams *txt_params  = &display_meta->text_params[0];
             NvOSD_TextParams *title  = &display_meta->text_params[1];
             display_meta->num_labels = 2; 
-	    txt_params->display_text = g_malloc0 (MAX_DISPLAY_LEN);
-	    title->display_text = g_malloc0 (MAX_DISPLAY_LEN);
+	    txt_params->display_text = (char *)g_malloc0 (MAX_DISPLAY_LEN);
+	    title->display_text = (char *)g_malloc0 (MAX_DISPLAY_LEN);
 	    for (int i = 0; i < (int)(line_cnt-1); i++) {
 	        offset += snprintf(txt_params->display_text + offset, MAX_DISPLAY_LEN, "車道 %d: %d     ", i+1, lane_vehicle_cnt[i]);
 	    }
@@ -978,7 +978,7 @@ int create_pipeline()
     }
 
     NvDsSRInitParams params = {0};
-    params.containerType = 0;
+    params.containerType = NVDSSR_CONTAINER_MP4;
     params.dirpath = "/home/nvidia/ftp";
     params.videoCacheSize = 60;
     params.defaultDuration = 10;

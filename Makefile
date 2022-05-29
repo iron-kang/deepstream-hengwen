@@ -35,14 +35,15 @@ ifeq ($(TARGET_DEVICE),aarch64)
   CFLAGS:= -DPLATFORM_TEGRA
 endif
 
-SRCS:= $(wildcard *.c)
-SRCS+= $(wildcard $(SDK_PATH)/sources/apps/apps-common/src/*.c)
+SRCS_CPP:= $(wildcard *.cpp)
+SRCS_C= $(wildcard $(SDK_PATH)/sources/apps/apps-common/src/*.c)
 
 INCS:= $(wildcard *.h)
 
-PKGS:= gstreamer-1.0 x11 json-glib-1.0
+PKGS:= gstreamer-1.0 x11 json-glib-1.0 opencv4 glib-2.0
 
-OBJS:= $(SRCS:.c=.o)
+OBJS:= $(SRCS_C:.c=.o)
+OBJS+= $(SRCS_CPP:.cpp=.o)
 
 CFLAGS+= -I$(SDK_PATH)/sources/includes -I$(SDK_PATH)/sources/apps/apps-common/includes \
 	 -I$(SDK_PATH)/sources/apps/sample_apps/deepstream-app/ -DDS_VERSION_MINOR=1 -DDS_VERSION_MAJOR=5 \
@@ -58,11 +59,11 @@ LIBS+= -L$(LIB_INSTALL_DIR) -lnvdsgst_meta -lnvds_meta -lgstrtspserver-1.0 -lnvd
 
 all: $(APP)
 
-%.o: %.c $(INCS) Makefile
-	$(CC) -c -o $@ $(CFLAGS) $<
+%.o: %.cpp $(INCS) Makefile
+	$(CXX) -c -o $@ $(CFLAGS) $<
 
 $(APP): $(OBJS) Makefile
-	$(CC) -o $(APP) $(OBJS) $(LIBS)
+	$(CXX) -o $(APP) $(OBJS) $(LIBS)
 
 install: $(APP)
 	cp -rv $(APP) $(APP_INSTALL_DIR)

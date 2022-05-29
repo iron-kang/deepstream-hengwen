@@ -83,11 +83,11 @@ gdouble gravity_hori = 0.0;
 gdouble gravity_vert = 0.0;
 guint line_cnt = 0;
 guint event_lane = 0;
-guint display_resolution[2] = {0};
+gint display_resolution[2] = {0};
 GstElement *plugin = NULL;
 NvDsSRContext *ctx = NULL;
 Line *lines;
-guint label_display = false;
+gint label_display = false;
 gint stuck_time = 0;
 
 /*
