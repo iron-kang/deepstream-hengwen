@@ -68,6 +68,7 @@ extern uint32_t event[128];
 extern GMainLoop *loop;
 extern Line *lines;
 extern gchar *lane_line;
+extern gint stuck_car_count;
 
 extern void record_handle(bool isStuck, int _event_lane);
 extern gboolean parse_lane(gchar *lane_line);
@@ -248,14 +249,6 @@ tiler_src_pad_buffer_probe(GstPad *pad, GstPadProbeInfo *info,
                     // g_print("skip...\n");
                     continue;
                 }
-                if (check_lane_stuck(lane_no - 1, obj_meta->object_id, tv, &duration))
-                {
-                    event_lane |= (1 << (lane_no - 1));
-                    alert = TRUE;
-                    // g_print(RED"alert\n");
-                }
-
-                sprintf(obj_meta->text_params.display_text, "%s: %ds", obj_meta->text_params.display_text, duration);
             }
         }
 
@@ -267,10 +260,9 @@ tiler_src_pad_buffer_probe(GstPad *pad, GstPadProbeInfo *info,
             display_meta->num_labels = 2;
             txt_params->display_text = (char *)g_malloc0(MAX_DISPLAY_LEN);
             title->display_text = (char *)g_malloc0(MAX_DISPLAY_LEN);
-            for (int i = 0; i < (int)(line_cnt - 1); i++)
-            {
-                offset += snprintf(txt_params->display_text + offset, MAX_DISPLAY_LEN, "車道 %d: %d     ", i + 1, lane_vehicle_cnt[i]);
-            }
+
+            offset += snprintf(txt_params->display_text + offset, MAX_DISPLAY_LEN, "車道 %d: %d     ", 1, lane_vehicle_cnt[0]);
+
             if (line_cnt == 0)
             {
                 offset += snprintf(txt_params->display_text + offset, MAX_DISPLAY_LEN, "總車輛: %d ", vehicle_total_cnt);
@@ -278,9 +270,9 @@ tiler_src_pad_buffer_probe(GstPad *pad, GstPadProbeInfo *info,
             snprintf(title->display_text, MAX_DISPLAY_LEN, "事件偵測攝影機");
 
             // g_print("%s\n", txt_params->display_text);
-            if (alert)
+            if (lane_vehicle_cnt[0] >= stuck_car_count)
             {
-                record_handle(true, event_lane);
+                record_handle(true, 0);
                 txt_params->font_params.font_color.red = 1.0;
                 txt_params->font_params.font_color.green = 0.2;
                 txt_params->font_params.font_color.blue = 0.1;

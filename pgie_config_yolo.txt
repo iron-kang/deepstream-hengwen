@@ -35,3 +35,4 @@ lane-line=441;720;433;0;990;717;486;0;1280;607;535;0;1280;405;573;0;1280;300;628
 gravity-hori=0.5
 gravity-vert=0.8
 label-display=1
+stuck-car-count=5

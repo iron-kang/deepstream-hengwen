@@ -29,6 +29,7 @@
 #define CONFIG_SOURCE_GRAVITY_HORI "gravity-hori"
 #define CONFIG_SOURCE_GRAVITY_VERT "gravity-vert"
 #define CONFIG_SOURCE_LABEL_DISPLAY "label-display"
+#define CONFIG_SOURCE_STUCK_CAR_COUNT "stuck-car-count"
 /* tracker group*/
 #define CONFIG_GROUP_TRACKER "tracker"
 #define CONFIG_GROUP_TRACKER_WIDTH "tracker-width"
@@ -39,18 +40,19 @@
 #define CONFIG_GROUP_TRACKER_ENABLE_PAST_FRAME "enable-past-frame"
 #define CONFIG_GPU_ID "gpu-id"
 
-#define CHECK_ERROR(error) \
-    if (error) { \
-        g_printerr ("Error while parsing config file: %s\n", error->message); \
-        goto done; \
+#define CHECK_ERROR(error)                                                   \
+    if (error)                                                               \
+    {                                                                        \
+        g_printerr("Error while parsing config file: %s\n", error->message); \
+        goto done;                                                           \
     }
 
-void update_class_attrs_all (GKeyFile *key_file, gchar *field, float val);
+void update_class_attrs_all(GKeyFile *key_file, gchar *field, float val);
 void get_class_attrs_double_value(GKeyFile *key_file, gchar *group, gchar *field, gdouble *val);
-void set_class_attrs_doublet_value (GKeyFile *key_file, gchar *group, gchar *field, gdouble val);
+void set_class_attrs_doublet_value(GKeyFile *key_file, gchar *group, gchar *field, gdouble val);
 void get_class_attrs_int_value(GKeyFile *key_file, gchar *group, gchar *field, gint *val);
-void set_class_attrs_int_value (GKeyFile *key_file, gchar *group, gchar *field, gint val);
+void set_class_attrs_int_value(GKeyFile *key_file, gchar *group, gchar *field, gint val);
 void get_class_attrs_string_value(GKeyFile *key_file, gchar *group, gchar *field, gchar **val);
-void set_class_attrs_string_value (GKeyFile *key_file, gchar *group, gchar *field, gchar *val);
+void set_class_attrs_string_value(GKeyFile *key_file, gchar *group, gchar *field, gchar *val);
 
 #endif
