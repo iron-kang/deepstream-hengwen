@@ -91,7 +91,7 @@ NvDsSRContext *ctx = NULL;
 Line *lines;
 gint label_display = false;
 gint stuck_time = 0;
-gint stuck_cart_count = 0;
+gint stuck_car_count = 0;
 
 /*
  *   | x   y   1|
