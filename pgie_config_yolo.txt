@@ -2,8 +2,8 @@
 gpu-id=0
 net-scale-factor=0.0039215697906911373
 model-color-format=0
-custom-network-config=yolov3.cfg
-model-file=yolov3.weights
+custom-network-config=yolov3-tiny.cfg
+model-file=yolov3-tiny.weights
 model-engine-file=model_b1_gpu0_int8.engine
 labelfile-path=labels.txt
 network-mode=1
@@ -26,7 +26,9 @@ start-rec-time=2
 rec-duration=15
 
 [source]
-uri=rtsp://admin:Admin1234!@10.80.20.107:554/ONVIF/MediaInput?profile=def_profile2
+#uri=rtsp://admin:Admin1234!@10.80.20.107:554/ONVIF/MediaInput?profile=def_profile2
+#uri=rtsp://192.168.2.230:554/live.sdpa
+uri=rtsp://192.168.1.106:8554/unicast
 out-rtsp-name=/nvidia
 stuck-time=15
 width=1280

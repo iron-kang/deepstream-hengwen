@@ -1,11 +1,11 @@
 [property]
 gpu-id=0
 net-scale-factor=0.0039215697906911373
-model-file=/opt/nvidia/deepstream/deepstream-5.1/samples/models/Primary_Detector/resnet10.caffemodel
-proto-file=/opt/nvidia/deepstream/deepstream-5.1/samples/models/Primary_Detector/resnet10.prototxt
-model-engine-file=/opt/nvidia/deepstream/deepstream-5.1/samples/models/Primary_Detector/resnet10.caffemodel_b1_gpu0_int8.engine
-labelfile-path=/opt/nvidia/deepstream/deepstream-5.1/samples/models/Primary_Detector/labels.txt
-int8-calib-file=/opt/nvidia/deepstream/deepstream-5.1/samples/models/Primary_Detector/cal_trt.bin
+model-file=/opt/nvidia/deepstream/deepstream-6.0/samples/models/Primary_Detector/resnet10.caffemodel
+proto-file=/opt/nvidia/deepstream/deepstream-6.0/samples/models/Primary_Detector/resnet10.prototxt
+model-engine-file=/opt/nvidia/deepstream/deepstream-6.0/samples/models/Primary_Detector/resnet10.caffemodel_b1_gpu0_int8.engine
+labelfile-path=/opt/nvidia/deepstream/deepstream-6.0/samples/models/Primary_Detector/labels.txt
+int8-calib-file=/opt/nvidia/deepstream/deepstream-6.0/samples/models/Primary_Detector/cal_trt.bin
 force-implicit-batch-dim=1
 batch-size=1
 process-mode=1
@@ -38,7 +38,9 @@ start-rec-time=2
 rec-duration=15
 
 [source]
-uri=rtsp://admin:Admin1234!@10.80.20.107/ONVIF/MediaInput?profile=def_profile2
+#uri=rtsp://admin:Admin1234!@10.80.20.107/ONVIF/MediaInput?profile=def_profile2
+#uri=rtsp://tapocam:tapocam@10.10.0.50:554/stream1
+uri=rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mp4
 out-rtsp-name=/nvidia
 stuck-time=15
 width=1280
@@ -47,3 +49,4 @@ lane-line=441;720;433;0;990;717;486;0;1280;607;535;0;1280;405;573;0;1280;300;628
 gravity-hori=0.5
 gravity-vert=0.8
 label-display=1
+stuck-car-count=5

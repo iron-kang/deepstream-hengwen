@@ -3,11 +3,11 @@
 
 #include <glib.h>
 
-#define TRACKER_CONFIG_FILE "tracker_config.txt"
+#define TRACKER_CONFIG_FILE "tracker_config_6_0.txt"
 #define MAX_TRACKING_ID_LEN 16
 
-#define PGIE_CONFIG_FILE "pgie_config_yolo.txt"
-//#define PGIE_CONFIG_FILE "pgie_config.txt"
+//#define PGIE_CONFIG_FILE "pgie_config_yolo.txt"
+#define PGIE_CONFIG_FILE "pgie_config.txt"
 #define SGIE_CONFIG_FILE "sgie_config.txt"
 /* class-attrs-all group*/
 #define CONFIG_CLASS_ATTRS_ALL "class-attrs-all"

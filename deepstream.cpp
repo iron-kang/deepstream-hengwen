@@ -265,7 +265,8 @@ tiler_src_pad_buffer_probe(GstPad *pad, GstPadProbeInfo *info,
 
             if (line_cnt == 0)
             {
-                offset += snprintf(txt_params->display_text + offset, MAX_DISPLAY_LEN, "總車輛: %d ", vehicle_total_cnt);
+		offset += snprintf(txt_params->display_text + offset, MAX_DISPLAY_LEN, "總車輛: %d ", vehicle_total_cnt);
+
             }
             snprintf(title->display_text, MAX_DISPLAY_LEN, "事件偵測攝影機");
 
@@ -925,8 +926,8 @@ int create_pipeline()
     g_object_set(G_OBJECT(caps), "caps", gst_caps_from_string("video/x-raw(memory:NVMM), format=I420"), NULL);
     g_object_set(G_OBJECT(h264enc), "bitrate", 8000000, NULL);
     g_object_set(G_OBJECT(h264enc), "iframeinterval", 1, NULL);
-    // g_object_set (G_OBJECT (h264enc), "profile", 2, "insert-sps-pps", 1, "bufapi-version", 1, "preset-level", 1, NULL);
-    g_object_set(G_OBJECT(h264enc), "profile", 2, NULL);
+    g_object_set (G_OBJECT (h264enc), "profile", 2, "insert-sps-pps", 1, "bufapi-version", 1, "preset-level", 1, NULL);
+    //g_object_set(G_OBJECT(h264enc), "profile", 2, NULL);
     g_object_set(G_OBJECT(sink_rtsp), "host", "127.0.0.1", "port", 5400, "async", FALSE, "sync", 1, NULL);
 
     /* Configure plugin property */
@@ -942,6 +943,7 @@ int create_pipeline()
         g_print("no lanes...\n");
 
     g_object_set(G_OBJECT(plugin), "lane-display", label_display, NULL);
+
     /* Set necessary properties of the tracker element. */
     if (!set_tracker_properties(nvtracker))
     {
@@ -1013,7 +1015,7 @@ int create_pipeline()
         return -1;
     }
     gst_object_unref(sink_pad);
-
+#if 0
     /* Create smart record */
     GstElement *queue_sr = gst_element_factory_make("queue", "queue-sr");
     GstElement *encoder_sr = gst_element_factory_make("nvv4l2h264enc", "encoder-sr");
@@ -1051,6 +1053,7 @@ int create_pipeline()
     }
 
     g_object_set(G_OBJECT(nvvidconv), "nvbuf-memory-type", 3, NULL);
+#endif
 }
 
 void deepstream_init(const char *config)

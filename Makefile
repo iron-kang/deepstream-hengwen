@@ -22,10 +22,10 @@
 
 APP:= image_analysis
 
-CUDA_VER?=11.1
+CUDA_VER?=10.2
 TARGET_DEVICE = $(shell gcc -dumpmachine | cut -f1 -d -)
 
-NVDS_VERSION:=5.1
+NVDS_VERSION:=6.0
 
 SDK_PATH?=/opt/nvidia/deepstream/deepstream-$(NVDS_VERSION)
 LIB_INSTALL_DIR?=$(SDK_PATH)/lib/
@@ -46,7 +46,7 @@ OBJS:= $(SRCS_C:.c=.o)
 OBJS+= $(SRCS_CPP:.cpp=.o)
 
 CFLAGS+= -I$(SDK_PATH)/sources/includes -I$(SDK_PATH)/sources/apps/apps-common/includes \
-	 -I$(SDK_PATH)/sources/apps/sample_apps/deepstream-app/ -DDS_VERSION_MINOR=1 -DDS_VERSION_MAJOR=5 \
+	 -I$(SDK_PATH)/sources/apps/sample_apps/deepstream-app/ -DDS_VERSION_MINOR=0 -DDS_VERSION_MAJOR=6 \
 	 -I /usr/local/cuda-$(CUDA_VER)/include
 
 CFLAGS+= `pkg-config --cflags $(PKGS)`

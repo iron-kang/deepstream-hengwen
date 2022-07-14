@@ -473,7 +473,7 @@ void record_handle(bool isStuck, int _event_lane)
         t = time(NULL);
         tm = *localtime(&t);
         gettimeofday(&rec_time, NULL);
-        NvDsSRStart(ctx, &sessId, start_rec_time, rec_duration, NULL);
+        //NvDsSRStart(ctx, &sessId, start_rec_time, rec_duration, NULL);
         if (isStuck)
         {
             event[0] = 1;
